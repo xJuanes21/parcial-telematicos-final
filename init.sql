@@ -1,5 +1,4 @@
 
-CREATE DATABASE myflaskapp;
 use myflaskapp;
 
 CREATE TABLE users (
