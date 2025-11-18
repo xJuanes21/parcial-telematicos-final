@@ -1,0 +1,20 @@
+groups:
+  - name: telematicos_alerts
+    rules:
+      - alert: HighCPUUsage
+        expr: avg(rate(node_cpu_seconds_total{mode!="idle"}[5m])) > 0.8
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "CPU alta por más de 2 minutos"
+          description: "El uso promedio de CPU supera el 80%."
+
+      - alert: LowDiskSpace
+        expr: (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) < 0.1
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Poco espacio en disco"
+          description: "El espacio disponible en / es menor al 10%."
